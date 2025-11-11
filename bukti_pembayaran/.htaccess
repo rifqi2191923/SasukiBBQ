@@ -1,0 +1,10 @@
+# Protect bukti pembayaran folder
+# Allow image viewing but prevent direct script execution
+<FilesMatch "\.php$">
+    Deny from all
+</FilesMatch>
+
+# Allow image files to be served
+<FilesMatch "\.(jpg|jpeg|png|gif)$">
+    Allow from all
+</FilesMatch>
