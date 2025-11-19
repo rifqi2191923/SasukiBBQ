@@ -391,7 +391,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                         <td>#<?php echo $res['id']; ?></td>
                         <td><?php echo htmlspecialchars($res['nama_pelanggan']); ?></td>
                         <td><?php echo $res['telepon']; ?></td>
-                        <td><?php echo formatTanggalIndonesia($res['tanggal']) . ' - ' . $res['jam']; ?></td>
+                        <td><?php echo formatTanggal($res['tanggal']) . ' - ' . $res['jam']; ?></td>
                         <td><?php echo $res['jumlah_orang']; ?> orang</td>
                         <td>Rp <?php echo number_format($res['total'], 0, ',', '.'); ?></td>
                         <td><span class="status-badge <?php echo $status_class; ?>"><?php echo $status_text; ?></span></td>

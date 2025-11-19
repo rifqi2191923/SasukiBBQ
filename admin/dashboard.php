@@ -7,6 +7,13 @@ date_default_timezone_set('Asia/Jakarta');
 
 session_start();
 
+// Handle logout
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'logout') {
+    session_destroy();
+    header('Location: dashboard.php');
+    exit;
+}
+
 // Simple authentication
 $admin_password = 'admin123'; // GANTI DENGAN PASSWORD YANG LEBIH KUAT!
 
@@ -696,7 +703,7 @@ if ($recent_result) {
                     <tr>
                         <td>#<?php echo $res['id']; ?></td>
                         <td><?php echo htmlspecialchars($res['nama_pelanggan']); ?></td>
-                        <td><?php echo formatTanggalIndonesia($res['tanggal']) . ' - ' . $res['jam']; ?></td>
+                        <td><?php echo formatTanggal($res['tanggal']) . ' - ' . $res['jam']; ?></td>
                         <td><?php echo $res['jumlah_orang']; ?> orang</td>
                         <td>Rp <?php echo number_format($res['total'], 0, ',', '.'); ?></td>
                         <td><span class="status-badge <?php echo $status_class; ?>"><?php echo $status_text; ?></span></td>
@@ -747,14 +754,6 @@ if ($recent_result) {
 
         updateTime();
         setInterval(updateTime, 1000);
-
-        // Handle logout
-        if (new URLSearchParams(window.location.search).has('logout')) {
-            <?php
-            session_destroy();
-            ?>
-            window.location.href = 'dashboard.php';
-        }
     </script>
 </body>
 </html>
